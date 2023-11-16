@@ -13,9 +13,9 @@ class Text:
         self.add_to_screen(screen, 30, "Player Score: " + str(world.score), 150, 50, RED)
 
     def victory_message(self, world, screen):
-        winner = 1 if world.p1score > world.p2score else 2
+        winner = world.score
         self.add_to_screen(
-            screen, 100, "The winner is Player " + str(winner) + "!", 640, 320
+            screen, 100, "Your score is " + str(winner) + "!", 640, 320
         )
 
     def add_to_screen(self, screen, font_size, text, center_x, center_y, color):

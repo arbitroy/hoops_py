@@ -49,7 +49,7 @@ class World:
         self.ball.draw(screen)
         for rim in self.rim:
             rim.draw(screen)
-         # Draw the bounce surface
+        #  Draw the bounce surface
         screen.blit(self.bounce_surface.image, self.bounce_surface.rect)
     def update(self, dt, power):
         self.check_for_collision()
@@ -80,7 +80,7 @@ class World:
         if self.ball_frame_count > self.ball_lifespan:
             self.reset(power)
 
-             
+            
     def normalize(self, v):
         return v / np.linalg.norm(v)
 
