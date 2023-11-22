@@ -5,7 +5,7 @@ from Ball import Ball2D
 from Rim import Rim2D
 class World:
     def __init__(self):
-        self.ball = Ball2D("basketball.png", 15, 0.1).set_pos([30, 30])
+        self.ball = Ball2D("basketball.png", 15, 0.1).set_pos([70, 125])
         self.rim = []
         self.e = 1.0 # Coefficient of restitution
         self.shot = False
@@ -27,7 +27,7 @@ class World:
     def reset(self, power):
         
         self.shot = False
-        self.ball = self.ball.set_pos([30, 30])
+        self.ball = self.ball.set_pos([70, 125])
         self.shot_from = 30
         self.ball_lifespan = 450
         power.reset()
@@ -46,7 +46,17 @@ class World:
         return rim
 
     def draw(self, screen):
-        self.ball.draw(screen)
+        # Check if the ball is in the specified coordinates
+        ball_invisible_coordinates = (70, 125)
+        if (
+            ball_invisible_coordinates[0] - self.ball.radius <= self.ball.state[0] <= ball_invisible_coordinates[0] + self.ball.radius
+            and ball_invisible_coordinates[1] - self.ball.radius <= self.ball.state[1] <= ball_invisible_coordinates[1] + self.ball.radius
+        ):
+            # Do not draw the ball
+            pass
+        else:
+            self.ball.draw(screen)
+            
         for rim in self.rim:
             rim.draw(screen)
         #  Draw the bounce surface
