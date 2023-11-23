@@ -1,9 +1,8 @@
-import pygame, sys
-from math import atan, radians, cos, sin
+import pygame
+import sys
 
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
-
 
 class PowerBar:
     def __init__(self):
@@ -12,12 +11,14 @@ class PowerBar:
         self.running = True
 
     def draw(self, screen):
+        # Draw the power bar on the screen
         power_bar_height = 50  # Adjust the height as needed
         power_bar_y = 50  # Adjust the y-coordinate to move the power bar upwards
         pygame.draw.rect(screen, BLACK, (320, power_bar_y, 640, power_bar_height), 1)
         pygame.draw.rect(screen, BLUE, (320, power_bar_y, self.power * 640 / 100, power_bar_height), 0)
 
     def get_angle(self, world):
+        # Calculate the shooting angle based on mouse position
         x, y = pygame.mouse.get_pos()
         dx = x - world.ball.state[0]
         dy = 640 - y - world.ball.state[1]
@@ -32,6 +33,7 @@ class PowerBar:
         return angle
 
     def start(self, world):
+        # Handle events and shoot the ball based on user input
         event = pygame.event.poll()
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -50,6 +52,7 @@ class PowerBar:
         self.move_bar()
 
     def shoot_ball(self, world):
+        # Shoot the ball with the calculated angle and power
         angle = self.get_angle(world)
         world.shot = True
         world.shot_from = world.ball.state[0]
@@ -57,14 +60,14 @@ class PowerBar:
         vel_x = vel * cos(angle)
         vel_y = vel * sin(angle)
         world.ball.set_vel([vel_x, vel_y])
-        # testing value, 100% will score at default position
-        # world.ball.set_vel([75, 96])
 
     def move_bar(self):
+        # Move the power bar and reverse direction if it reaches limits
         self.power += self.direction
         if self.power <= 0 or self.power >= 100:
             self.direction *= -1
 
     def reset(self):
+        # Reset the power bar to initial values
         self.power = 0
         self.direction = 1

@@ -8,7 +8,7 @@ from World import World
 from PowerBar import PowerBar
 from Text import Text
 from Timer import Timer  
-from pause_button import PauseButton  # Import the pause button module
+from pause_button import PauseButton  
 
 # Define colors
 BLACK = (0, 0, 0)
@@ -53,10 +53,10 @@ pause_font = pygame.font.Font(None, 36)
 # Create a Timer instance with a duration of 60 seconds
 game_timer = Timer(60 * 1000)  # 60 seconds converted to milliseconds
 
-# Define a variable to track whether the game is paused
+# variable to track whether the game is paused
 is_paused = False
 
-# Modify the display_pause_menu function
+#  the display_pause_menu function
 def display_pause_menu(screen):
     overlay = pygame.Surface((win_width, win_height), pygame.SRCALPHA)
     overlay.fill((0, 0, 0, 128))

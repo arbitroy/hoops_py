@@ -4,6 +4,7 @@ class Character(pygame.sprite.Sprite):
     def __init__(self, position, idle_image, aim_image, shoot_image, scale_factor=0.2):
         super().__init__()
 
+        # Load character images and scale them
         self.idle_image = pygame.image.load(idle_image).convert_alpha()
         self.aim_image = pygame.image.load(aim_image).convert_alpha()
         self.shoot_image = pygame.image.load(shoot_image).convert_alpha()
@@ -18,13 +19,14 @@ class Character(pygame.sprite.Sprite):
         self.is_shooting = False  # Add a flag to track shooting state
 
     def update(self, is_shooting):  
+        # Update the character's image based on shooting state
         self.is_shooting = is_shooting
 
-        # Update logic here if needed
         if self.is_shooting:
             self.image = self.shoot_image
         else:
             self.image = self.aim_image if pygame.mouse.get_focused() else self.idle_image
 
     def draw(self, screen):
+        # Draw the character on the specified screen
         screen.blit(self.image, self.rect)
